@@ -1,0 +1,64 @@
+Mods:
+  - curseforge: 
+      baseurl: https://www.curseforge.com/minecraft/mc-mods
+      mods:
+        - name: Fabric API
+          id: fabric-api
+        - name: Malilib
+          id: malilib
+        - name: Advanced XRay
+          id: advanced-xray-fabric-edition
+        - name: Logical Zoom
+          id: logical-zoom
+        - name: Litematica
+          id: litematica
+        - name: Light Overlay
+          id: light-overlay
+        - name: Architectury API
+          id: architectury-api
+        - name: Cloth Config API
+          id: cloth-config
+        - name: Command Macros
+          id: command-macros
+        - name: Continuity
+          id: continuity
+        - name: Custom Crosshair
+          id: custom-crosshair-mod 
+        - name: Simple Voice Chat
+          id: simple-voice-chat
+        - name: Mouse Wheelie
+          id: mouse-wheelie
+        - name: Indium
+          id: indium
+        - name: Xaero's Minimap
+          id: xaeros-minimap
+        - name: Xaero's Worldmap
+          id: xaeros-world-map
+        - name: Gamma Utils
+          id: gamma-utils
+        - name: Tweakeroo
+          id: tweakeroo
+        - name: Better F3
+          id: betterf3
+  
+  - modrinth:
+      baseurl: https://modrinth.com/mod
+      mods:
+        - name: Sodium
+          id: sodium
+        - name: Mod Menu
+          id: modmenu
+  
+  - github:
+      baseurl: https://github.com
+      mods:
+        - name: Seedcracker
+          id: 19MisterX98/SeedcrackerX
+
+Output: 
+  path: .
+  folderName: mods-%version%
+
+Browser:
+  path: C:/Program Files\Google/Chrome/Application/chrome.exe
+  servicePath: ./chromedriver.exe
