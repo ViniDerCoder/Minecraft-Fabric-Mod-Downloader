@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 import requests
 
 def downloadModrinthMod(browser, url, version, path):
-    filesUrl = f"{url}/versions?l=fabric&g={version}"
+    filesUrl = f"{url}/versions?l=fabric&c=release&g={version}"
 
     print("> File Page url: " + filesUrl)
     print("> Starting page...")
@@ -16,14 +16,14 @@ def downloadModrinthMod(browser, url, version, path):
     print("> Waiting for file declarations...")
 
     fileSearchResults = WebDriverWait(browser, 5).until(
-        EC.presence_of_all_elements_located((By.CLASS_NAME, "version-button"))
+        EC.presence_of_all_elements_located((By.CLASS_NAME, "versions-grid-row"))
     )
 
     print("> Found file declarations")
     
     print("> Generatiog download url...")
 
-    downloadUrl = f"{fileSearchResults[0].find_element(By.CLASS_NAME, 'download-button').get_attribute('href')}"
+    downloadUrl = fileSearchResults[0].find_element(By.XPATH, '//*[@id="__nuxt"]/div/main/div[5]/div[6]/div[3]/section/div[2]/div[3]/div[2]/div[1]/a').get_attribute('href')
 
     print("> Download URL: " + downloadUrl)
     print("> Downloading file...")
