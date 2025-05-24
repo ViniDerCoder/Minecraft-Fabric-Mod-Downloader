@@ -7,11 +7,17 @@ except ImportError:
     from yaml import Loader
 
 from downloadMod import downloadMod, startBrowser 
+import sys
 
 if __name__ == '__main__':
-
-    stream = open("config.yml", 'r')
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    config_path = os.path.join(script_dir, "config.yml")
+    
+    stream = open(config_path, 'r')
     configDict = load(stream, Loader)
+
+    if len(sys.argv) > 1 and sys.argv[1]:
+        configDict["Output"]["path"] = sys.argv[1]
 
     version = input("Enter Minecraft Version: ")
 
@@ -26,7 +32,12 @@ if __name__ == '__main__':
 
     
     output = configDict.get("Output")
-    fullPath = output.get("path") + "/" + output.get("folderName").replace("%version%", version)
+    output_path = output.get("path")
+
+    if not os.path.isabs(output_path):
+        output_path = os.path.join(script_dir, output_path)
+
+    fullPath = os.path.join(output_path, output.get("folderName").replace("%version%", version))
 
     print("Using specified output directory: " + fullPath)
     
@@ -34,6 +45,12 @@ if __name__ == '__main__':
         os.makedirs(fullPath)
     
     browserPaths = configDict.get("Browser")
+
+    if browserPaths.get("path") and not os.path.isabs(browserPaths.get("path")):
+        browserPaths["path"] = os.path.join(script_dir, browserPaths.get("path"))
+    if browserPaths.get("servicePath") and not os.path.isabs(browserPaths.get("servicePath")):
+        browserPaths["servicePath"] = os.path.join(script_dir, browserPaths.get("servicePath"))
+        
     driver = startBrowser(browserPaths.get("path"), browserPaths.get("servicePath"))
 
 
